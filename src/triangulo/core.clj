@@ -9,7 +9,7 @@
 (defn calc-radianos
   "TODO: Calcular radianos dado lados a b e c de um triangulo"
   [a b c]
-  (math/to-radians (calc-angulo a b c)))
+  )
 
 (defn calc-angulo
   "TODO: Calcula o ângulo ∠A, dado A B C."
@@ -30,20 +30,6 @@
               (reduce * [(- s a) (- s b) (- s c)])
               (* s)
               math/sqrt))))
-
-;tentativas em vão de fazer tudo num threading inteiro sem usar let
-
-;(double (as-> (-> (+ a b c) (/ 2)) s
-    ;            (reduce * [(- s a) (- s b) (- s c)])
-     ;           )))
-
-;(->
-;    (+ a b c)
-;    (/ 2)
-;    math/sqrt)
-;(reduce * [(- a) (- b) (- c)])
-;math/sqrt
-;#(* (- % a) (- % b) (- % c))
 
 (defn calc-altura
   "TODO: Calcula altura de A, dado a AREA."
@@ -73,20 +59,32 @@
   "TODO: Verifica se é um triangulo retangulo, cujos angulos são iguais a 90o.
   O resultado não é exato, dado que cada angulo é arredondado utilizando clojure.math/round."
   [a b c]
-  (if (= (or ((math/round (calc-angulo a b c))) ((math/round (calc-angulo b a c))) ((math/round (calc-angulo c a b)))) 90.0)
-    true))
+  (let [angulo-a (math/round (calc-angulo a b c))
+        angulo-b (math/round (calc-angulo b a c))
+        angulo-c (math/round (calc-angulo c a b))]
+    (if (or (= angulo-a 90) (= angulo-b 90) (= angulo-c 90))
+      true
+      false)))
 
 (defn obtuso?
   "TODO: Verifica se o triangulo é obtuso, tendo algum angulo >90o."
   [a b c]
-  (if (> (or ((math/round (calc-angulo a b c))) ((math/round (calc-angulo b a c))) ((math/round (calc-angulo c a b)))) 90.0)
-    true))
+  (let [angulo-a (math/round (calc-angulo a b c))
+        angulo-b (math/round (calc-angulo b a c))
+        angulo-c (math/round (calc-angulo c a b))]
+    (if (or (> angulo-a 90) (> angulo-b 90) (> angulo-c 90))
+      true
+      false)))
 
 (defn agudo?
-  "TODO: Verifica se o triangulo é obtuso, tendo algum angulo >90o."
+  "TODO: Verifica se o triangulo é agudo, tendo algum angulo <90o."
   [a b c]
-  (if (< (and ((math/round (calc-angulo a b c))) ((math/round (calc-angulo b a c))) ((math/round (calc-angulo c a b)))) 90.0)
-    true))
+  (let [angulo-a (math/round (calc-angulo a b c))
+        angulo-b (math/round (calc-angulo b a c))
+        angulo-c (math/round (calc-angulo c a b))]
+    (if (and (< angulo-a 90) (< angulo-b 90) (< angulo-c 90))
+      true
+      false)))
 
 (defn gerar-dados-completos
   [a b c]
