@@ -9,13 +9,18 @@
 (defn calc-radianos
   "TODO: Calcular radianos dado lados a b e c de um triangulo"
   [a b c]
-  ; 1 grau equivale a pi/180 rad
-  )
+  (math/to-radians (calc-angulo a b c)))
 
 (defn calc-angulo
   "TODO: Calcula o ângulo ∠A, dado A B C."
   [a b c]
-  )
+  (->
+    (math/pow b 2)
+    (+ (math/pow c 2))
+    (- (math/pow a 2))
+    (/ (* 2 b c))
+    math/acos
+    math/to-degrees))
 
 (defn calc-area
   "TODO: Calcula a área de um triângulo usando a formula de Heron."
@@ -26,7 +31,9 @@
               (* s)
               math/sqrt))))
 
-  ;(double (as-> (-> (+ a b c) (/ 2)) s
+;tentativas em vão de fazer tudo num threading inteiro sem usar let
+
+;(double (as-> (-> (+ a b c) (/ 2)) s
     ;            (reduce * [(- s a) (- s b) (- s c)])
      ;           )))
 
