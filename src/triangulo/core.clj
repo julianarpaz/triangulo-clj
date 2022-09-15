@@ -24,22 +24,26 @@
 (defn calc-altura
   "TODO: Calcula altura de A, dado a AREA."
   [a area]
-  )
+  (->
+    (* area 2)
+    (/ a)))
 
 (defn equilateral?
   "TODO: Verifica se o triangulo é equilateral"
   [a b c]
-  )
+  (and (= a b) (= a c)))
 
 (defn isosceles?
   "TODO: Verifica se pelo menos dois lados sao iguais."
   [a b c]
-  )
+  (or (= a b) (= a c) (= b c)))
 
 (defn escaleno?
   "TODO: Verifica se os lados dos triangulos sao diferentes entre si."
   [a b c]
-  )
+  (if (or (equilateral? a b c) (isosceles? a b c))
+    false
+    true))
 
 (defn retangulo?
   "TODO: Verifica se é um triangulo retangulo, cujos angulos são iguais a 90o.
