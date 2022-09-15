@@ -9,6 +9,7 @@
 (defn calc-radianos
   "TODO: Calcular radianos dado lados a b e c de um triangulo"
   [a b c]
+  ; 1 grau equivale a pi/180 rad
   )
 
 (defn calc-angulo
@@ -19,7 +20,23 @@
 (defn calc-area
   "TODO: Calcula a área de um triângulo usando a formula de Heron."
   [a b c]
-  )
+  (double (let [s (-> (+ a b c) (/ 2))]
+            (->
+              (reduce * [(- s a) (- s b) (- s c)])
+              (* s)
+              math/sqrt))))
+
+  ;(double (as-> (-> (+ a b c) (/ 2)) s
+    ;            (reduce * [(- s a) (- s b) (- s c)])
+     ;           )))
+
+;(->
+;    (+ a b c)
+;    (/ 2)
+;    math/sqrt)
+;(reduce * [(- a) (- b) (- c)])
+;math/sqrt
+;#(* (- % a) (- % b) (- % c))
 
 (defn calc-altura
   "TODO: Calcula altura de A, dado a AREA."
