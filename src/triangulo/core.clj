@@ -51,9 +51,7 @@
 (defn escaleno?
   "TODO: Verifica se os lados dos triangulos sao diferentes entre si."
   [a b c]
-  (if (or (equilateral? a b c) (isosceles? a b c))
-    false
-    true))
+  (not (or (equilateral? a b c) (isosceles? a b c))))
 
 (defn retangulo?
   "TODO: Verifica se é um triangulo retangulo, cujos angulos são iguais a 90o.
