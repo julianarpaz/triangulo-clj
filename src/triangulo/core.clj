@@ -41,7 +41,7 @@
 (defn equilateral?
   "TODO: Verifica se o triangulo é equilateral"
   [a b c]
-  (and (= a b) (= a c)))
+  (= a b c))
 
 (defn isosceles?
   "TODO: Verifica se pelo menos dois lados sao iguais."
